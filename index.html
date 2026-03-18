@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAssist AI | Smart Hospital Kiosk</title>
+    <meta name="description" content="AI-powered voice receptionist for intelligent hospital patient routing and appointment booking.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Ambient Background -->
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="kiosk-shell">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="hospital-brand">
+                <i class="fa-solid fa-hospital"></i>
+                <span>MedAssist AI</span>
+            </div>
+            <div class="live-badge">
+                <span class="pulse-dot"></span> LIVE
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="kiosk-body">
+
+            <!-- HOME SCREEN -->
+            <div id="home-screen" class="screen active">
+                <div class="hero-section">
+                    <h1>How can I help you<br>today?</h1>
+                    <p class="hero-sub">Tap below & speak naturally — I'll guide you.</p>
+                </div>
+
+                <div class="mic-area">
+                    <button id="mic-btn" class="mic-button" aria-label="Start speaking">
+                        <i class="fa-solid fa-microphone"></i>
+                    </button>
+                    <div class="mic-rings">
+                        <div class="ring r1"></div>
+                        <div class="ring r2"></div>
+                        <div class="ring r3"></div>
+                    </div>
+                    <p id="status-text" class="mic-label">Tap to speak</p>
+                </div>
+
+                <!-- Chat Bubbles -->
+                <div class="chat-area">
+                    <div id="user-bubble" class="bubble user-bubble hidden">
+                        <i class="fa-solid fa-user"></i>
+                        <span id="user-text"></span>
+                    </div>
+                    <div id="ai-bubble" class="bubble ai-bubble hidden">
+                        <i class="fa-solid fa-robot"></i>
+                        <span id="ai-response"></span>
+                    </div>
+                    <!-- Email Input -->
+                    <div id="email-form-container" class="email-card hidden">
+                        <p>Enter your email to confirm:</p>
+                        <div class="email-row">
+                            <input type="email" id="patient-email" placeholder="your.name@gmail.com" required>
+                            <button id="submit-email-btn" aria-label="Submit email"><i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button class="qa-btn" data-action="pharmacy"><i class="fa-solid fa-pills"></i> Pharmacy</button>
+                    <button class="qa-btn" data-action="blood"><i class="fa-solid fa-droplet"></i> Blood Bank</button>
+                    <button class="qa-btn" data-action="appointment"><i class="fa-solid fa-calendar-check"></i> Appointments</button>
+                </div>
+            </div>
+
+            <!-- BOOKING SCREEN -->
+            <div id="booking-screen" class="screen hidden">
+                <div class="result-card success-card">
+                    <div class="card-icon success"><i class="fa-solid fa-circle-check"></i></div>
+                    <h2>Appointment Booked</h2>
+                    <div class="info-grid">
+                        <div class="info-item"><span class="info-label">Doctor</span><span id="booked-doctor-name" class="info-value"></span></div>
+                        <div class="info-item"><span class="info-label">Department</span><span id="booked-department" class="info-value"></span></div>
+                        <div class="info-item"><span class="info-label">Time</span><span id="booked-time" class="info-value"></span></div>
+                    </div>
+                    <p id="booking-notice" class="notice-text">Confirmation sent to patient & doctor via email.</p>
+                    <button class="action-btn home-return-btn"><i class="fa-solid fa-house"></i> Back to Home</button>
+                </div>
+            </div>
+
+            <!-- PHARMACY SCREEN -->
+            <div id="pharmacy-screen" class="screen hidden">
+                <div class="result-card pharmacy-card">
+                    <div class="card-icon pharmacy"><i class="fa-solid fa-pills"></i></div>
+                    <h2>Pharmacy Stock</h2>
+                    <ul class="stock-list">
+                        <li><span class="stock-name">Paracetamol 500mg</span><span class="stock-badge in-stock">In Stock</span></li>
+                        <li><span class="stock-name">Amoxicillin 250mg</span><span class="stock-badge in-stock">In Stock</span></li>
+                        <li><span class="stock-name">Ibuprofen 400mg</span><span class="stock-badge in-stock">In Stock</span></li>
+                        <li><span class="stock-name">Cough Syrup</span><span class="stock-badge out-stock">Out of Stock</span></li>
+                        <li><span class="stock-name">Aspirin 100mg</span><span class="stock-badge in-stock">In Stock</span></li>
+                    </ul>
+                    <p class="notice-text">Collect medicines at Counter #3, Ground Floor.</p>
+                    <button class="action-btn home-return-btn"><i class="fa-solid fa-house"></i> Back to Home</button>
+                </div>
+            </div>
+
+            <!-- BLOOD BANK SCREEN -->
+            <div id="blood-screen" class="screen hidden">
+                <div class="result-card blood-card">
+                    <div class="card-icon blood"><i class="fa-solid fa-droplet"></i></div>
+                    <h2>Blood Bank Availability</h2>
+                    <div class="blood-grid">
+                        <div class="blood-type available"><span class="bt-label">A+</span><span class="bt-status">Available</span></div>
+                        <div class="blood-type available"><span class="bt-label">B+</span><span class="bt-status">Available</span></div>
+                        <div class="blood-type available"><span class="bt-label">AB+</span><span class="bt-status">Available</span></div>
+                        <div class="blood-type urgent"><span class="bt-label">O-</span><span class="bt-status">Urgent Need</span></div>
+                        <div class="blood-type available"><span class="bt-label">O+</span><span class="bt-status">Available</span></div>
+                        <div class="blood-type available"><span class="bt-label">B-</span><span class="bt-status">Available</span></div>
+                    </div>
+                    <p class="notice-text">Visit the 2nd Floor Blood Donation Center.</p>
+                    <button class="action-btn home-return-btn"><i class="fa-solid fa-house"></i> Back to Home</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
